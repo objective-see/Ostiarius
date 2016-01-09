@@ -1,0 +1,406 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7D8488C61C350BA500148F37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8488C51C350BA500148F37 /* main.m */; };
+		7D8488CC1C350BFC00148F37 /* ConfigureWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8488C71C350BFC00148F37 /* ConfigureWindowController.m */; };
+		7D8488CD1C350BFC00148F37 /* ErrorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8488CA1C350BFC00148F37 /* ErrorWindowController.m */; };
+		7D8488CF1C350C6500148F37 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7D8488CE1C350C6500148F37 /* en.lproj */; };
+		7D8488D11C350C7B00148F37 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7D8488D01C350C7B00148F37 /* Base.lproj */; };
+		7D8488D41C350CAE00148F37 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8488D21C350CAE00148F37 /* MainMenu.xib */; };
+		7D8488D81C35191F00148F37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D8488D71C35191F00148F37 /* Images.xcassets */; };
+		7D8488DE1C351C5900148F37 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8488DD1C351C5900148F37 /* icon.png */; };
+		7D8488E11C351F3000148F37 /* ostiarius.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8488E01C351F3000148F37 /* ostiarius.png */; };
+		7DF0DC5E1C350A690050D65D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0DC5D1C350A690050D65D /* AppDelegate.m */; };
+		7DF0DC671C350A780050D65D /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0DC5F1C350A780050D65D /* Utilities.m */; };
+		7DF0DC681C350A780050D65D /* Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0DC611C350A780050D65D /* Logging.m */; };
+		7DF0DC691C350A780050D65D /* Exception.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0DC621C350A780050D65D /* Exception.m */; };
+		7DF0DC6A1C350A780050D65D /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0DC641C350A780050D65D /* Configure.m */; };
+		7DF0DC6E1C350AD20050D65D /* ErrorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DF0DC6D1C350AD20050D65D /* ErrorWindowController.xib */; };
+		7DF0DC701C350ADC0050D65D /* ConfigureWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DF0DC6F1C350ADC0050D65D /* ConfigureWindowController.xib */; };
+		CD7F088C19AE6DCA00FF00FC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7F088B19AE6DCA00FF00FC /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7D8488C21C350B9400148F37 /* Ostiarius-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Ostiarius-Prefix.pch"; path = "Ostiarius/Ostiarius-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		7D8488C31C350B9400148F37 /* Ostiarius-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Ostiarius-Info.plist"; path = "Ostiarius/Ostiarius-Info.plist"; sourceTree = SOURCE_ROOT; };
+		7D8488C51C350BA500148F37 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Ostiarius/main.m; sourceTree = SOURCE_ROOT; };
+		7D8488C71C350BFC00148F37 /* ConfigureWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigureWindowController.m; path = Ostiarius/ConfigureWindowController.m; sourceTree = SOURCE_ROOT; };
+		7D8488C81C350BFC00148F37 /* ConfigureWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigureWindowController.h; path = Ostiarius/ConfigureWindowController.h; sourceTree = SOURCE_ROOT; };
+		7D8488C91C350BFC00148F37 /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logging.h; path = Ostiarius/Logging.h; sourceTree = SOURCE_ROOT; };
+		7D8488CA1C350BFC00148F37 /* ErrorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorWindowController.m; path = Ostiarius/ErrorWindowController.m; sourceTree = SOURCE_ROOT; };
+		7D8488CB1C350BFC00148F37 /* ErrorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorWindowController.h; path = Ostiarius/ErrorWindowController.h; sourceTree = SOURCE_ROOT; };
+		7D8488CE1C350C6500148F37 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en.lproj; path = Ostiarius/en.lproj; sourceTree = SOURCE_ROOT; };
+		7D8488D01C350C7B00148F37 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = Ostiarius/Base.lproj; sourceTree = SOURCE_ROOT; };
+		7D8488D31C350CAE00148F37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Ostiarius/Base.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		7D8488D71C35191F00148F37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Ostiarius/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		7D8488DD1C351C5900148F37 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Ostiarius/images/icon.png; sourceTree = SOURCE_ROOT; };
+		7D8488E01C351F3000148F37 /* ostiarius.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ostiarius.png; path = Ostiarius/images/ostiarius.png; sourceTree = SOURCE_ROOT; };
+		7DF0DC5C1C350A690050D65D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Ostiarius/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		7DF0DC5D1C350A690050D65D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Ostiarius/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		7DF0DC5F1C350A780050D65D /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utilities.m; path = Ostiarius/Utilities.m; sourceTree = SOURCE_ROOT; };
+		7DF0DC601C350A780050D65D /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utilities.h; path = Ostiarius/Utilities.h; sourceTree = SOURCE_ROOT; };
+		7DF0DC611C350A780050D65D /* Logging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logging.m; path = Ostiarius/Logging.m; sourceTree = SOURCE_ROOT; };
+		7DF0DC621C350A780050D65D /* Exception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Exception.m; path = Ostiarius/Exception.m; sourceTree = SOURCE_ROOT; };
+		7DF0DC631C350A780050D65D /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = Ostiarius/Exception.h; sourceTree = SOURCE_ROOT; };
+		7DF0DC641C350A780050D65D /* Configure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Configure.m; path = Ostiarius/Configure.m; sourceTree = SOURCE_ROOT; };
+		7DF0DC651C350A780050D65D /* Configure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Configure.h; path = Ostiarius/Configure.h; sourceTree = SOURCE_ROOT; };
+		7DF0DC661C350A780050D65D /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Consts.h; path = Ostiarius/Consts.h; sourceTree = SOURCE_ROOT; };
+		7DF0DC6D1C350AD20050D65D /* ErrorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ErrorWindowController.xib; path = Ostiarius/UI/ErrorWindowController.xib; sourceTree = SOURCE_ROOT; };
+		7DF0DC6F1C350ADC0050D65D /* ConfigureWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigureWindowController.xib; path = Ostiarius/UI/ConfigureWindowController.xib; sourceTree = SOURCE_ROOT; };
+		CD7F088819AE6DCA00FF00FC /* Ostiarius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ostiarius.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD7F088B19AE6DCA00FF00FC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		CD7F088E19AE6DCA00FF00FC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		CD7F089019AE6DCA00FF00FC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD7F088519AE6DCA00FF00FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD7F088C19AE6DCA00FF00FC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7D8488DF1C351C5D00148F37 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7D8488E01C351F3000148F37 /* ostiarius.png */,
+				7D8488DD1C351C5900148F37 /* icon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		CD7C872019D4428100EC7F0A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7D8488D21C350CAE00148F37 /* MainMenu.xib */,
+				7DF0DC6F1C350ADC0050D65D /* ConfigureWindowController.xib */,
+				7DF0DC6D1C350AD20050D65D /* ErrorWindowController.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		CD7F087F19AE6DCA00FF00FC = {
+			isa = PBXGroup;
+			children = (
+				CD7F089119AE6DCA00FF00FC /* Ostiarius */,
+				CD7F088A19AE6DCA00FF00FC /* Frameworks */,
+				CD7F088919AE6DCA00FF00FC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD7F088919AE6DCA00FF00FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD7F088819AE6DCA00FF00FC /* Ostiarius.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD7F088A19AE6DCA00FF00FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD7F088E19AE6DCA00FF00FC /* AppKit.framework */,
+				CD7F088B19AE6DCA00FF00FC /* Cocoa.framework */,
+				CD7F089019AE6DCA00FF00FC /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD7F089119AE6DCA00FF00FC /* Ostiarius */ = {
+			isa = PBXGroup;
+			children = (
+				7D8488D71C35191F00148F37 /* Images.xcassets */,
+				7DF0DC5C1C350A690050D65D /* AppDelegate.h */,
+				7DF0DC5D1C350A690050D65D /* AppDelegate.m */,
+				7D8488C71C350BFC00148F37 /* ConfigureWindowController.m */,
+				7D8488C81C350BFC00148F37 /* ConfigureWindowController.h */,
+				7DF0DC651C350A780050D65D /* Configure.h */,
+				7DF0DC641C350A780050D65D /* Configure.m */,
+				7DF0DC661C350A780050D65D /* Consts.h */,
+				7D8488CA1C350BFC00148F37 /* ErrorWindowController.m */,
+				7D8488CB1C350BFC00148F37 /* ErrorWindowController.h */,
+				7DF0DC631C350A780050D65D /* Exception.h */,
+				7DF0DC621C350A780050D65D /* Exception.m */,
+				7D8488C91C350BFC00148F37 /* Logging.h */,
+				7DF0DC611C350A780050D65D /* Logging.m */,
+				7DF0DC601C350A780050D65D /* Utilities.h */,
+				7DF0DC5F1C350A780050D65D /* Utilities.m */,
+				7D8488D01C350C7B00148F37 /* Base.lproj */,
+				7D8488CE1C350C6500148F37 /* en.lproj */,
+				7D8488DF1C351C5D00148F37 /* Images */,
+				CD7F089219AE6DCA00FF00FC /* Supporting Files */,
+				CD7C872019D4428100EC7F0A /* UI */,
+			);
+			name = Ostiarius;
+			path = KnockKnock;
+			sourceTree = "<group>";
+		};
+		CD7F089219AE6DCA00FF00FC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7D8488C51C350BA500148F37 /* main.m */,
+				7D8488C21C350B9400148F37 /* Ostiarius-Prefix.pch */,
+				7D8488C31C350B9400148F37 /* Ostiarius-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD7F088719AE6DCA00FF00FC /* Ostiarius */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD7F08B919AE6DCA00FF00FC /* Build configuration list for PBXNativeTarget "Ostiarius" */;
+			buildPhases = (
+				CD7F088419AE6DCA00FF00FC /* Sources */,
+				CD7F088519AE6DCA00FF00FC /* Frameworks */,
+				CD7F088619AE6DCA00FF00FC /* Resources */,
+				7D774F241C015DBD00A9CCE4 /* Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ostiarius;
+			productName = KnockKnock;
+			productReference = CD7F088819AE6DCA00FF00FC /* Ostiarius.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD7F088019AE6DCA00FF00FC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Synack;
+				TargetAttributes = {
+					CD7F088719AE6DCA00FF00FC = {
+						DevelopmentTeam = VBG97UB4TA;
+					};
+				};
+			};
+			buildConfigurationList = CD7F088319AE6DCA00FF00FC /* Build configuration list for PBXProject "Ostiarius" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CD7F087F19AE6DCA00FF00FC;
+			productRefGroup = CD7F088919AE6DCA00FF00FC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD7F088719AE6DCA00FF00FC /* Ostiarius */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD7F088619AE6DCA00FF00FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DF0DC6E1C350AD20050D65D /* ErrorWindowController.xib in Resources */,
+				7D8488DE1C351C5900148F37 /* icon.png in Resources */,
+				7D8488D41C350CAE00148F37 /* MainMenu.xib in Resources */,
+				7D8488E11C351F3000148F37 /* ostiarius.png in Resources */,
+				7DF0DC701C350ADC0050D65D /* ConfigureWindowController.xib in Resources */,
+				7D8488D81C35191F00148F37 /* Images.xcassets in Resources */,
+				7D8488D11C350C7B00148F37 /* Base.lproj in Resources */,
+				7D8488CF1C350C6500148F37 /* en.lproj in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7D774F241C015DBD00A9CCE4 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -R -f $BUILT_PRODUCTS_DIR/Ostiarius.kext $BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Resources/\n#cp -R -f /Users/patrickw/objective-see/BlockBlock/DerivedData/BlockBlock/Build/Products/Release/BlockBlock.kext /Users/patrickw/objective-see/BlockBlock/DerivedData/BlockBlock/Build/Intermediates/ArchiveIntermediates/BlockBlock/InstallationBuildProductsLocation/Applications/BlockBlock.app/Contents/Resources\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD7F088419AE6DCA00FF00FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D8488CD1C350BFC00148F37 /* ErrorWindowController.m in Sources */,
+				7DF0DC6A1C350A780050D65D /* Configure.m in Sources */,
+				7DF0DC691C350A780050D65D /* Exception.m in Sources */,
+				7DF0DC5E1C350A690050D65D /* AppDelegate.m in Sources */,
+				7DF0DC671C350A780050D65D /* Utilities.m in Sources */,
+				7D8488C61C350BA500148F37 /* main.m in Sources */,
+				7DF0DC681C350A780050D65D /* Logging.m in Sources */,
+				7D8488CC1C350BFC00148F37 /* ConfigureWindowController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7D8488D21C350CAE00148F37 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D8488D31C350CAE00148F37 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CD7F08B719AE6DCA00FF00FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CD7F08B819AE6DCA00FF00FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CD7F08BA19AE6DCA00FF00FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ostiarius/Ostiarius-Prefix.pch";
+				INFOPLIST_FILE = "Ostiarius/Ostiarius-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objectiveSee.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Ostiarius;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CD7F08BB19AE6DCA00FF00FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ostiarius/Ostiarius-Prefix.pch";
+				INFOPLIST_FILE = "Ostiarius/Ostiarius-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objectiveSee.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Ostiarius;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD7F088319AE6DCA00FF00FC /* Build configuration list for PBXProject "Ostiarius" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD7F08B719AE6DCA00FF00FC /* Debug */,
+				CD7F08B819AE6DCA00FF00FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD7F08B919AE6DCA00FF00FC /* Build configuration list for PBXNativeTarget "Ostiarius" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD7F08BA19AE6DCA00FF00FC /* Debug */,
+				CD7F08BB19AE6DCA00FF00FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD7F088019AE6DCA00FF00FC /* Project object */;
+}

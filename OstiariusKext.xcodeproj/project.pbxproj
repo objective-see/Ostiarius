@@ -1,0 +1,276 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7DFB276D1C332ADD00F68885 /* OstiariusKext.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7DFB276C1C332ADD00F68885 /* OstiariusKext.hpp */; };
+		7DFB276F1C332ADD00F68885 /* OstiariusKext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DFB276E1C332ADD00F68885 /* OstiariusKext.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7DFB27691C332ADD00F68885 /* Ostiarius.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ostiarius.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DFB276C1C332ADD00F68885 /* OstiariusKext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OstiariusKext.hpp; sourceTree = "<group>"; };
+		7DFB276E1C332ADD00F68885 /* OstiariusKext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OstiariusKext.cpp; sourceTree = "<group>"; };
+		7DFB27701C332ADD00F68885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7DFB27651C332ADD00F68885 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7DFB275F1C332ADD00F68885 = {
+			isa = PBXGroup;
+			children = (
+				7DFB276B1C332ADD00F68885 /* OstiariusKext */,
+				7DFB276A1C332ADD00F68885 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7DFB276A1C332ADD00F68885 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7DFB27691C332ADD00F68885 /* Ostiarius.kext */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7DFB276B1C332ADD00F68885 /* OstiariusKext */ = {
+			isa = PBXGroup;
+			children = (
+				7DFB276C1C332ADD00F68885 /* OstiariusKext.hpp */,
+				7DFB276E1C332ADD00F68885 /* OstiariusKext.cpp */,
+				7DFB27701C332ADD00F68885 /* Info.plist */,
+			);
+			path = OstiariusKext;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7DFB27661C332ADD00F68885 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DFB276D1C332ADD00F68885 /* OstiariusKext.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7DFB27681C332ADD00F68885 /* OstiariusKext */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7DFB27731C332ADD00F68885 /* Build configuration list for PBXNativeTarget "OstiariusKext" */;
+			buildPhases = (
+				7DFB27641C332ADD00F68885 /* Sources */,
+				7DFB27651C332ADD00F68885 /* Frameworks */,
+				7DFB27661C332ADD00F68885 /* Headers */,
+				7DFB27671C332ADD00F68885 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OstiariusKext;
+			productName = OstiariusKext;
+			productReference = 7DFB27691C332ADD00F68885 /* Ostiarius.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7DFB27601C332ADD00F68885 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Objective-See";
+				TargetAttributes = {
+					7DFB27681C332ADD00F68885 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 7DFB27631C332ADD00F68885 /* Build configuration list for PBXProject "OstiariusKext" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DFB275F1C332ADD00F68885;
+			productRefGroup = 7DFB276A1C332ADD00F68885 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7DFB27681C332ADD00F68885 /* OstiariusKext */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7DFB27671C332ADD00F68885 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7DFB27641C332ADD00F68885 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DFB276F1C332ADD00F68885 /* OstiariusKext.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7DFB27711C332ADD00F68885 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7DFB27721C332ADD00F68885 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7DFB27741C332ADD00F68885 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0d1;
+				INFOPLIST_FILE = OstiariusKext/Info.plist;
+				MODULE_NAME = "com.objective-see.OstiariusKext";
+				MODULE_VERSION = 1.0.0d1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objective-see.OstiariusKext";
+				PRODUCT_NAME = Ostiarius;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		7DFB27751C332ADD00F68885 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0d1;
+				INFOPLIST_FILE = OstiariusKext/Info.plist;
+				MODULE_NAME = "com.objective-see.OstiariusKext";
+				MODULE_VERSION = 1.0.0d1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.objective-see.OstiariusKext";
+				PRODUCT_NAME = Ostiarius;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7DFB27631C332ADD00F68885 /* Build configuration list for PBXProject "OstiariusKext" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7DFB27711C332ADD00F68885 /* Debug */,
+				7DFB27721C332ADD00F68885 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7DFB27731C332ADD00F68885 /* Build configuration list for PBXNativeTarget "OstiariusKext" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7DFB27741C332ADD00F68885 /* Debug */,
+				7DFB27751C332ADD00F68885 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7DFB27601C332ADD00F68885 /* Project object */;
+}
