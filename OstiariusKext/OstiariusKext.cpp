@@ -171,21 +171,12 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
         
     }// no qAttrz
     
-    
     /* STEP 2:
        check if binary was previously allowed */
     
-    //Apple ('_quarantine_get_flags') does this check first
-    // ->not sure what 0x6 is ... but, like Apple just allows binaries with this flag
-    if(0 == (qFlags & 0x6))
-    {
-        //bail
-        goto bail;
-    }
-    
     //CoreServicesUIAgent (user-mode) sets flags to 0x40 when user clicks 'allow'
     // ->so just allow such binaries
-    else if(0 != (qFlags & 0x40))
+    if(0 != (qFlags & 0x40))
     {
         //dbg msg
         DEBUG_PRINT(("OSTIARIUS: previously approved, so allowing\n"));
@@ -204,7 +195,7 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     wasLocked = TRUE;
     
     /* STEP 3:
-       check if binary is signed */
+       check if binary is signed (method inspired by Gatekeerper, tx @osxreverser!) */
     
     //init offset pointer
     offsetPointer = (unsigned char*)(vnode_t)arg0;
@@ -245,7 +236,8 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     }
     
     //dbg msg
-    DEBUG_PRINT(("OSTIARIUS: %s is NOT SIGNED, so blocking\n", path));
+    // ->always print
+    printf("OSTIARIUS: %s is from the internet & unsigned -> BLOCKING!\n", path));
     
     //kill the process
     // ->can't return 'KAUTH_RESULT_DENY', because its ignored (see 'Mac OS X Internals')
