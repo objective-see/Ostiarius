@@ -8,6 +8,8 @@
 
 #include "OstiariusKext.hpp"
 
+//TODO: convert all printfs (non-error ones) to DEBUG_PRINT
+
 //required macro
 OSDefineMetaClassAndStructors(com_objectiveSee_OstiariusKext, IOService)
 
@@ -203,8 +205,6 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     //get pointer to struct ubc_info in vnode struct
     // ->disasm from kernel:  mov rax, [vnode+70h]
     offsetPointer += 0x70;
-    
-    //bail when pointer is NULL
     if(0 == *(unsigned long*)(offsetPointer))
     {
         //bail
@@ -479,7 +479,7 @@ void findDMG(char* mountFrom, char* diskImage)
         if(NULL == bsdName)
         {
             //err msg
-            printf("OSTIARIUS ERROR: failed to BSD NAME\n");
+            printf("OSTIARIUS ERROR: failed to get BSD NAME\n");
             
             //ignore
             continue;
