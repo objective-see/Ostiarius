@@ -240,7 +240,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -R -f $BUILT_PRODUCTS_DIR/Ostiarius.kext $BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Resources/\n#cp -R -f /Users/patrickw/objective-see/BlockBlock/DerivedData/BlockBlock/Build/Products/Release/BlockBlock.kext /Users/patrickw/objective-see/BlockBlock/DerivedData/BlockBlock/Build/Intermediates/ArchiveIntermediates/BlockBlock/InstallationBuildProductsLocation/Applications/BlockBlock.app/Contents/Resources\n";
+			shellScript = "#cp -R -f $BUILT_PRODUCTS_DIR/Ostiarius.kext $BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Resources/\ncp -R -f /Users/patrick/objective-see/Ostiarius/DerivedData/Ostiarius/Build/Products/Release/Ostiarius.kext /Users/patrick/objective-see/Ostiarius/DerivedData/Ostiarius/Build/Intermediates/ArchiveIntermediates/Ostiarius/InstallationBuildProductsLocation/Applications/Ostiarius.app/Contents/Resources\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -352,13 +352,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ostiarius/Ostiarius-Prefix.pch";
 				INFOPLIST_FILE = "Ostiarius/Ostiarius-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.objectiveSee.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Ostiarius;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -368,13 +370,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ostiarius/Ostiarius-Prefix.pch";
 				INFOPLIST_FILE = "Ostiarius/Ostiarius-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.objectiveSee.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Ostiarius;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

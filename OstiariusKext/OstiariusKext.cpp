@@ -8,8 +8,6 @@
 
 #include "OstiariusKext.hpp"
 
-//TODO: convert all printfs (non-error ones) to DEBUG_PRINT
-
 //required macro
 OSDefineMetaClassAndStructors(com_objectiveSee_OstiariusKext, IOService)
 
@@ -20,11 +18,14 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     //mount point
     mount_t mount = {0};
     
-    //path length
-    int pathLength = MAXPATHLEN;
+    //pid
+    int pid = -1;
     
     //path
     char path[MAXPATHLEN+1] = {0};
+    
+    //path length
+    int pathLength = MAXPATHLEN;
     
     //quarantine flags
     unsigned int qFlags = 0;
@@ -41,11 +42,8 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     //offset pointer
     unsigned char* offsetPointer = NULL;
     
-    //pid
-    int pid = -1;
-    
     //vfsstatfs struct
-    struct vfsstatfs *	vfsstat = NULL;
+    struct vfsstatfs* vfsstat = NULL;
     
     //vfs context
     vfs_context_t vfsContext = NULL;
@@ -64,6 +62,9 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
         goto bail;
     }
     
+    //get pid
+    pid = proc_selfpid();
+    
     //zero out path
     bzero(&path, sizeof(path));
     
@@ -71,26 +72,23 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     if(0 != vn_getpath((vnode_t)arg0, path, &pathLength))
     {
         //err msg
-        printf("OSTIARIUS ERROR: vn_getpath() failed\n");
+        DEBUG_PRINT(("OSTIARIUS ERROR: vn_getpath() failed\n"));
         
         //bail
         goto bail;
     }
     
-    //get pid
-    pid = proc_selfpid();
-    
     //dbg msg
     DEBUG_PRINT(("OSTIARIUS: new process: %s %d\n", path, pid));
+    
+    /* STEP 1:
+       check if binary is from the internet, by checking its quarantine attributes */
     
     //get quarantine attribute flags
     qFlags = getQAttrFlags((vnode_t)arg0);
     
-    /* STEP 1:
-     check if binary is from the internet */
-    
     //no q flags indicates binary not from the internet
-    // ->*unless* its from a DMG
+    // ->unless, its from a DMG, then need to find/check DMG
     if(0 == qFlags)
     {
         //from a dmg?
@@ -126,8 +124,7 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
         //zero out dmg path
         bzero(&dmgPath, sizeof(dmgPath));
         
-        //find disk image
-        // ->need this path to check its q attrz
+        //find disk image that file was mounted from
         findDMG(vfsstat->f_mntfromname, (char*)&dmgPath);
         if(0 == strlen((const char*)dmgPath))
         {
@@ -159,8 +156,8 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
             goto bail;
         }
         
-        //finally get q attr flags again
-        // ->if dmg doesn't have any, allow (as its prolly not from the internet)
+        //finally get q attr flags for DMG
+        // ->if it doesn't have any, allow as its not from the internet
         qFlags = getQAttrFlags(dmgVnode);
         if(0 == qFlags)
         {
@@ -174,7 +171,7 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     }// no qAttrz
     
     /* STEP 2:
-       check if binary was previously allowed */
+       check if binary was previously allowed by checking quarantine attribute flags */
     
     //CoreServicesUIAgent (user-mode) sets flags to 0x40 when user clicks 'allow'
     // ->so just allow such binaries
@@ -190,14 +187,14 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     //dbg msg
     DEBUG_PRINT(("OSTIARIUS: binary is from the internet and has not been user-approved\n"));
     
+    /* STEP 3:
+       check if binary is signed (method inspired by Gatekeerper, tx @osxreverser!) */
+    
     //lock vnode
     lck_mtx_lock((lck_mtx_t *)arg0);
     
     //set lock flag
     wasLocked = TRUE;
-    
-    /* STEP 3:
-       check if binary is signed (method inspired by Gatekeerper, tx @osxreverser!) */
     
     //init offset pointer
     offsetPointer = (unsigned char*)(vnode_t)arg0;
@@ -225,7 +222,8 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     //dbg msg
     //DEBUG_PRINT(("OSTIARIUS: ubc_info 'cs_blob': %p\n", offsetPointer));
     
-    //non-null csBlogs means process is signed
+    //non-null csBlogs means process's binary is signed
+    // ->note: yah, its a limitation that the binary could be signed, but invalidly
     if(0 != *(unsigned long*)(offsetPointer))
     {
         //dbg msg
@@ -237,7 +235,7 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     
     //dbg msg
     // ->always print
-    printf("OSTIARIUS: %s is from the internet & unsigned -> BLOCKING!\n", path));
+    printf("OSTIARIUS: %s is from the internet & is unsigned -> BLOCKING!\n", path);
     
     //kill the process
     // ->can't return 'KAUTH_RESULT_DENY', because its ignored (see 'Mac OS X Internals')
@@ -291,7 +289,7 @@ unsigned int getQAttrFlags(vnode_t vnode)
     }
     
     //get quarantine attributes
-    // ->if this 'fails', simply means binary doesn't have quarantine attributes (i.e. not from the internet)
+    // ->if this 'fails', simply means binary doesn't have quarantine attributes
     if(0 != mac_vnop_getxattr(vnode, QFLAGS_STRING_ID, qAttr, QATTR_SIZE-1, &qAttrLength))
     {
         //dbg msg
@@ -312,7 +310,7 @@ unsigned int getQAttrFlags(vnode_t vnode)
     if(1 != sscanf(qAttr, "%04x", &qFlags))
     {
         //err msg
-        printf("OSTIARIUS ERROR: sscanf('%s',...) failed\n", qAttr);
+        DEBUG_PRINT(("OSTIARIUS ERROR: sscanf('%s',...) failed\n", qAttr));
         
         //bail
         goto bail;
@@ -377,7 +375,7 @@ void findDMG(char* mountFrom, char* diskImage)
     if(NULL == matchingDictionary)
     {
         //err msg
-        printf("OSTIARIUS ERROR: serviceMatching() failed\n");
+        DEBUG_PRINT(("OSTIARIUS ERROR: serviceMatching() failed\n"));
         
         //bail
         goto bail;
@@ -388,7 +386,7 @@ void findDMG(char* mountFrom, char* diskImage)
     if(NULL == iterator)
     {
         //err msg
-        printf("OSTIARIUS ERROR: getMatchingServices() failed\n");
+        DEBUG_PRINT(("OSTIARIUS ERROR: getMatchingServices() failed\n"));
         
         //bail
         goto bail;
@@ -398,11 +396,12 @@ void findDMG(char* mountFrom, char* diskImage)
     // ->grab 'image-path' then iterate down to get 'BSD Name'
     while(NULL != (ioHDIXHD = (IORegistryEntry*)iterator->getNextObject()))
     {
-        //make sure candidateDiskImage is always freed (from previous iterations)
+        //make sure candidate image is always freed
+        // ->obv. this only comes into play during multiple iterations
         if(NULL != candidateDiskImage)
         {
             //free
-            OSFree(candidateDiskImage, imagePathLength, allocTag);
+            OSFree(candidateDiskImage, imagePathLength+1, allocTag);
             
             //unset
             candidateDiskImage = NULL;
@@ -439,14 +438,14 @@ void findDMG(char* mountFrom, char* diskImage)
         candidateDiskImage[imagePathLength] = 0x0;
         
         //dbg msg
-        printf("OSTIARIUS: image-path: %s\n", candidateDiskImage);
+        DEBUG_PRINT(("OSTIARIUS: image-path: %s\n", candidateDiskImage));
         
         //find 'IODiskImageBlockStorageDeviceOutKernel' child
         child = findChild(ioHDIXHD, "IODiskImageBlockStorageDeviceOutKernel");
         if(NULL == child)
         {
             //err msg
-            printf("OSTIARIUS ERROR: failed to find child 'IODiskImageBlockStorageDeviceOutKernel'\n");
+            DEBUG_PRINT(("OSTIARIUS ERROR: failed to find child 'IODiskImageBlockStorageDeviceOutKernel'\n"));
             
             //ignore
             continue;
@@ -457,7 +456,7 @@ void findDMG(char* mountFrom, char* diskImage)
         if(NULL == child)
         {
             //err msg
-            printf("OSTIARIUS ERROR: failed to find child 'IOBlockStorageDriver'\n");
+            DEBUG_PRINT(("OSTIARIUS ERROR: failed to find child 'IOBlockStorageDriver'\n"));
             
             //ignore
             continue;
@@ -468,7 +467,7 @@ void findDMG(char* mountFrom, char* diskImage)
         if(NULL == child)
         {
             //err msg
-            printf("OSTIARIUS ERROR: failed to find child 'IOMedia'\n");
+            DEBUG_PRINT(("OSTIARIUS ERROR: failed to find child 'IOMedia'\n"));
             
             //ignore
             continue;
@@ -479,7 +478,7 @@ void findDMG(char* mountFrom, char* diskImage)
         if(NULL == bsdName)
         {
             //err msg
-            printf("OSTIARIUS ERROR: failed to get BSD NAME\n");
+            DEBUG_PRINT(("OSTIARIUS ERROR: failed to get BSD NAME\n"));
             
             //ignore
             continue;
@@ -489,7 +488,7 @@ void findDMG(char* mountFrom, char* diskImage)
         bsdNameBytes = bsdName->getCStringNoCopy();
         
         //dbg msg
-        printf("OSTIARIUS: BSD-name: %s\n", bsdNameBytes);
+        DEBUG_PRINT(("OSTIARIUS: BSD-name: %s\n", bsdNameBytes));
         
         //sanity check
         // mount from should start w/ /dev/
@@ -513,14 +512,14 @@ void findDMG(char* mountFrom, char* diskImage)
         if(0 != strncmp(bsdNameBytes, offsetPointer, strlen(bsdNameBytes)))
         {
             //dbg msg
-            printf("OSTIARIUS: %s != %s\n", mountFrom, bsdNameBytes);
+            DEBUG_PRINT(("OSTIARIUS: %s != %s\n", mountFrom, bsdNameBytes));
             
             //ignore
             continue;
         }
         
         //dbg msg
-        printf("OSTIARIUS: %s == %s\n", mountFrom, bsdNameBytes);
+        DEBUG_PRINT(("OSTIARIUS: %s == %s\n", mountFrom, bsdNameBytes));
         
         //save disk image's path into [out] parameter
         strncpy(diskImage, candidateDiskImage, MAXPATHLEN);
@@ -528,7 +527,7 @@ void findDMG(char* mountFrom, char* diskImage)
         //all set
         break;
     
-    }//all 'IOHDIXHDDriveOutKernel' entries
+    } //all 'IOHDIXHDDriveOutKernel' entries
     
 //bail
 bail:
@@ -558,7 +557,7 @@ bail:
     if(NULL != candidateDiskImage)
     {
         //free
-        OSFree(candidateDiskImage, imagePathLength, allocTag);
+        OSFree(candidateDiskImage, imagePathLength+1, allocTag);
         
         //unset
         candidateDiskImage = NULL;
@@ -584,7 +583,7 @@ IORegistryEntry* findChild(IORegistryEntry* parent, const char* name)
     IORegistryEntry* child = NULL;
     
     //dbg msg
-    printf("OSTIARIUS: looking for child: %s\n", name);
+    DEBUG_PRINT(("OSTIARIUS: looking for child: %s\n", name));
     
     //init iterator
     iterator = parent->getChildIterator(gIOServicePlane);
@@ -606,7 +605,7 @@ IORegistryEntry* findChild(IORegistryEntry* parent, const char* name)
         }
         
         //dbg
-        printf("OSTIARIUS: child -> %s/%s\n", candidateChild->getName(gIOServicePlane), metaClass->getClassName());
+        DEBUG_PRINT(("OSTIARIUS: child -> %s/%s\n", candidateChild->getName(gIOServicePlane), metaClass->getClassName()));
         
         //check for match
         if(0 == strncmp(metaClass->getClassName(), name, strlen(name)))
@@ -618,7 +617,7 @@ IORegistryEntry* findChild(IORegistryEntry* parent, const char* name)
             break;
         }
     
-    }//all children
+    } //all children
     
 //bail
 bail:
@@ -659,7 +658,7 @@ bool com_objectiveSee_OstiariusKext::start(IOService *provider)
         (version_revision >= 2) )
     {
         //err msg
-        printf("OSTIARIUS ERROR: %d.%d.%d is an unsupported OS\n", version_major, version_minor, version_revision);
+        DEBUG_PRINT(("OSTIARIUS ERROR: %d.%d.%d is an unsupported OS\n", version_major, version_minor, version_revision));
         
         //bail
         goto bail;
@@ -671,7 +670,7 @@ bool com_objectiveSee_OstiariusKext::start(IOService *provider)
     if(NULL == kauthListener)
     {
         //err msg
-        printf("OSTIARIUS ERROR: kauth_listen_scope('KAUTH_SCOPE_FILEOP',...) failed\n");
+        DEBUG_PRINT(("OSTIARIUS ERROR: kauth_listen_scope('KAUTH_SCOPE_FILEOP',...) failed\n"));
         
         //bail
         goto bail;
@@ -682,7 +681,7 @@ bool com_objectiveSee_OstiariusKext::start(IOService *provider)
     if(NULL == allocTag)
     {
         //err msg
-        printf("OSTIARIUS ERROR: OSMalloc_Tagalloc() failed\n");
+        DEBUG_PRINT(("OSTIARIUS ERROR: OSMalloc_Tagalloc() failed\n"));
         
         //bail
         goto bail;

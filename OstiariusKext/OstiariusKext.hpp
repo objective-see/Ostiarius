@@ -11,17 +11,16 @@
 
 extern "C"
 {
+    
 #include <string.h>
 #include <sys/proc.h>
-#include <sys/vnode.h>
-#include <sys/mount.h>
 #include <sys/kauth.h>
+#include <sys/mount.h>
+#include <sys/vnode.h>
 #include <libkern/libkern.h>
 #include <libkern/version.h>
 #include <libkern/OSMalloc.h>
 #include <security/mac_policy.h>
-    
-#include <IOKit/IOLib.h>
     
 }
 
@@ -40,7 +39,7 @@ kauth_listener_t kauthListener = NULL;
 OSMallocTag allocTag = NULL;
 
 //buffer size for quarantine attributes
-// ->'_quarantine_get_flags' disassembly in Quarantine.kext uses this size...
+// ->value extracted from '_quarantine_get_flags' disassembly in Quarantine.kext
 #define QATTR_SIZE 0x1001
 
 //quarantine flag identifier
