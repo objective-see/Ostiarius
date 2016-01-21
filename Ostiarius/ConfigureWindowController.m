@@ -292,11 +292,30 @@ bail:
     //msg font
     NSColor* resultMsgColor = nil;
     
+    //generally want centered text
+    [self.statusMsg setAlignment:NSCenterTextAlignment];
+    
     //success
     if(YES == success)
     {
-        //set result msg
-        resultMsg = [NSString stringWithFormat:@"Ostiarius %@ed", self.actionButton.title];
+        //special case for 'install'
+        // ->add note for re-installing
+        if(YES == [self.actionButton.title isEqualToString:@"Install"])
+        {
+            //set result msg
+            resultMsg = [NSString stringWithFormat:@"Ostiarius %@ed (note: on OS upgrade new version may be required)", self.actionButton.title];
+            
+            //align text left
+            [self.statusMsg setAlignment:NSLeftTextAlignment];
+        }
+        
+        //case for uninstall
+        // ->just init with standard msg
+        else
+        {
+            //set result msg
+            resultMsg = [NSString stringWithFormat:@"Ostiarius %@ed", self.actionButton.title];
+        }
         
         //set font to black
         resultMsgColor = [NSColor blackColor];
@@ -317,9 +336,6 @@ bail:
     
     //stop/hide spinner
     [self.activityIndicator stopAnimation:nil];
-    
-    //align text center
-    [self.statusMsg setAlignment:NSCenterTextAlignment];
     
     //grab exiting frame
     statusMsgFrame = self.statusMsg.frame;

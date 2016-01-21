@@ -188,7 +188,7 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     DEBUG_PRINT(("OSTIARIUS: binary is from the internet and has not been user-approved\n"));
     
     /* STEP 3:
-       check if binary is signed (method inspired by Gatekeerper, tx @osxreverser!) */
+       check if binary is signed (method inspired by Gatekeerper/csfg_get_platform_binary, tx @osxreverser!) */
     
     //lock vnode
     lck_mtx_lock((lck_mtx_t *)arg0);
@@ -650,12 +650,12 @@ bool com_objectiveSee_OstiariusKext::start(IOService *provider)
     }
     
     //dbg msg
-    DEBUG_PRINT(("OSTIARIUS: starting...\n"));
+    DEBUG_PRINT(("OSTIARIUS: starting (system version: %d,%d,%d)...\n", version_major, version_minor, version_revision));
     
     //version check
-    // ->only El Capitan, up to 10.11.2
+    // ->only El Capitan, up to 10.11.4 (15.4.0)
     if( (version_major != 15) ||
-        (version_revision >= 2) )
+        (version_minor > 4) )
     {
         //err msg
         DEBUG_PRINT(("OSTIARIUS ERROR: %d.%d.%d is an unsupported OS\n", version_major, version_minor, version_revision));

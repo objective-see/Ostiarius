@@ -130,29 +130,40 @@ BOOL isSupportedOS()
     
     //get OS version info
     osVersionInfo = getOSVersion();
-    
-    //sanity check
     if(nil == osVersionInfo)
     {
         //bail
         goto bail;
     }
     
+    //dbg msg
+    logMsg(LOG_DEBUG, [NSString stringWithFormat:@"OS version: %@", osVersionInfo]);
+    
     //gotta be OS X
     if(10 != [osVersionInfo[@"majorVersion"] intValue])
     {
         //err msg
-        logMsg(LOG_DEBUG, [NSString stringWithFormat:@"OS major version %@ not supported", osVersionInfo[@"majorVersion"]]);
+        logMsg(LOG_ERR, [NSString stringWithFormat:@"OS major version %@ not supported", osVersionInfo[@"majorVersion"]]);
         
         //bail
         goto bail;
     }
     
     //gotta be OS X 11
-    if([osVersionInfo[@"minorVersion"] intValue] < 11)
+    if([osVersionInfo[@"minorVersion"] intValue] != 11)
     {
         //err msg
-        logMsg(LOG_DEBUG, [NSString stringWithFormat:@"OS minor version %@ not supported", osVersionInfo[@"minor"]]);
+        logMsg(LOG_ERR, [NSString stringWithFormat:@"OS minor version %@ not supported", osVersionInfo[@"minor"]]);
+        
+        //bail
+        goto bail;
+    }
+    
+    //got be OS X 11.0-4
+    if([osVersionInfo[@"bugfixVersion"] intValue] > 4)
+    {
+        //err msg
+        logMsg(LOG_ERR, [NSString stringWithFormat:@"OS bug fix version %@ not supported", osVersionInfo[@"bugfixVersion"]]);
         
         //bail
         goto bail;
@@ -179,6 +190,9 @@ NSDictionary* getOSVersion()
     //minor v
     SInt32 minorVersion = 0;
     
+    //bug fix v
+    SInt32 fixVersion = 0;
+    
     //alloc dictionary
     osVersionInfo = [NSMutableDictionary dictionary];
     
@@ -202,11 +216,24 @@ NSDictionary* getOSVersion()
         goto bail;
     }
     
+    //get bug fix version
+    if(STATUS_SUCCESS != Gestalt(gestaltSystemVersionBugFix, &fixVersion))
+    {
+        //reset
+        osVersionInfo = nil;
+        
+        //bail
+        goto bail;
+    }
+    
     //set major version
     osVersionInfo[@"majorVersion"] = [NSNumber numberWithInteger:majorVersion];
     
     //set minor version
     osVersionInfo[@"minorVersion"] = [NSNumber numberWithInteger:minorVersion];
+    
+    //set bug fix version
+    osVersionInfo[@"bugfixVersion"] = [NSNumber numberWithInteger:fixVersion];
     
 //bail
 bail:
