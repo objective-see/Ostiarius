@@ -14,9 +14,7 @@
 
 @implementation ConfigureWindowController
 
-@synthesize action;
 @synthesize statusMsg;
-@synthesize windowTitle;
 @synthesize moreInfoButton;
 
 //automatically called when nib is loaded
@@ -31,56 +29,37 @@
 
 //configure window/buttons
 // ->also brings window to front
--(void)configure:(NSString*)title action:(NSUInteger)requestedAction
+-(void)configure:(BOOL)isInstalled
 {
-    //save window title
-    self.windowTitle = title;
-    
-    //save action
-    self.action = requestedAction;
-    
     //set window title
-    [self window].title = self.windowTitle;
+    [self window].title = [NSString stringWithFormat:@"version %@", getAppVersion()];
     
     //dbg msg
     logMsg(LOG_DEBUG, @"configuring install/uninstall window");
     
-    //init button title
-    // ->based on action
-    switch (self.action)
+    //init status msg
+    [self.statusMsg setStringValue:@"blocks unsigned internet binaries"];
+    
+    //enable 'uninstall' button when app is installed already
+    if(YES == isInstalled)
     {
-        //install
-        case ACTION_INSTALL_FLAG:
-            
-            //set
-            self.actionButton.title = ACTION_INSTALL;
-            
-            //init status msg
-            [self.statusMsg setStringValue:@"blocks unsigned internet binaries"];
-
-            break;
-            
-        //uninstall
-        case ACTION_UNINSTALL_FLAG:
-            
-            //set
-            self.actionButton.title = ACTION_UNINSTALL;
-            
-            //init status msg
-            [self.statusMsg setStringValue:@"disable & remove protection"];
-
-            break;
-            
-        default:
-            break;
+        //enable
+        self.uninstallButton.enabled = YES;
+    }
+    //otherwise disable
+    else
+    {
+        //disable
+        self.uninstallButton.enabled = NO;
     }
     
-    //dbg msg
-    logMsg(LOG_DEBUG, [NSString stringWithFormat:@"%@/%@", self.actionButton.title, self.window.title]);
+    //make 'install' have focus
+    // ->more likely they'll be upgrading
+    [self.window makeFirstResponder:self.installButton];
     
     //set delegate
     [self.window setDelegate:self];
-
+    
     return;
 }
 
@@ -102,84 +81,83 @@
     
     //make white
     [self.window setBackgroundColor: NSColor.whiteColor];
-
-    return;
-}
-
-//button handler for 'cancel'
-// ->just close window, which will trigger app exit
--(IBAction)cancel:(id)sender
-{
-    //dbg msg
-    logMsg(LOG_DEBUG, @"handling 'cancel' button click, exiting process");
-    
-    //close
-    [self.window close];
     
     return;
 }
 
-//button handler for action ('install' || 'uninstall')
--(IBAction)handleActionClick:(id)sender
+//button handler for uninstall/install
+-(IBAction)buttonHandler:(id)sender
 {
     //button title
-    NSString* button = nil;
+    NSString* buttonTitle = nil;
     
     //extact button title
-    button = ((NSButton*)sender).title;
+    buttonTitle = ((NSButton*)sender).title;
+    
+    //action
+    NSUInteger action = 0;
     
     //dbg msg
-    logMsg(LOG_DEBUG, [NSString stringWithFormat:@"handling action click: %@", button]);
+    logMsg(LOG_DEBUG, [NSString stringWithFormat:@"handling action click: %@", buttonTitle]);
     
-    //handle non-'close' clicks
-    if(YES != [button isEqualToString:ACTION_CLOSE])
+    //hide 'get more info' button
+    self.moreInfoButton.hidden = YES;
+    
+    //set action
+    // ->install daemon
+    if(YES == [buttonTitle isEqualToString:ACTION_INSTALL])
     {
-        //disable 'x' button
-        // ->don't want user killing app during install/upgrade
-        [[self.window standardWindowButton:NSWindowCloseButton] setEnabled:NO];
-        
-        //clear status msg
-        [self.statusMsg setStringValue:@""];
-        
-        //force redraw of status msg
-        // ->sometime doesn't refresh (e.g. slow VM)
-        [self.statusMsg setNeedsDisplay:YES];
-        
-        //dbg msg
-        logMsg(LOG_DEBUG, [NSString stringWithFormat:@"%@'ing Ostiarius", button]);
-        
-        //invoke logic to install/uninstall
-        // ->do in background so UI doesn't block
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-        ^{
-            //install/uninstall
-            [self lifeCycleEvent:self.action];
-        });
+        //set
+        action = ACTION_INSTALL_FLAG;
     }
-    
-    //handle 'close'
-    // ->just close window, which will trigger app exit
+    //set action
+    // ->uninstall daemon
     else
     {
-        //close
-        [self.window close];
+        //set
+        action = ACTION_UNINSTALL_FLAG;
     }
+    
+    //disable 'x' button
+    // ->don't want user killing app during install/upgrade
+    [[self.window standardWindowButton:NSWindowCloseButton] setEnabled:NO];
+    
+    //clear status msg
+    [self.statusMsg setStringValue:@""];
+    
+    //force redraw of status msg
+    // ->sometime doesn't refresh (e.g. slow VM)
+    [self.statusMsg setNeedsDisplay:YES];
+    
+    //dbg msg
+    logMsg(LOG_DEBUG, [NSString stringWithFormat:@"%@'ing Ostiarius", buttonTitle]);
+    
+    //invoke logic to install/uninstall
+    // ->do in background so UI doesn't block
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+    ^{
+        //install/uninstall
+        [self lifeCycleEvent:action];
 
+        //dbg msg
+        logMsg(LOG_DEBUG, [NSString stringWithFormat:@"done %@'ing Ostiarius", buttonTitle]);
+    });
+    
 //bail
 bail:
     
     return;
 }
 
-//button handler that's automatically invoked when user clicks '?' button (on an error)
-// ->load objective-see's documentation for error(s)
--(IBAction)handleInfoClick:(id)sender
+//button handler for '?' button (on an error)
+// ->load objective-see's documentation for error(s) in default browser
+-(IBAction)info:(id)sender
 {
     //url
     NSURL *helpURL = nil;
     
     //build help URL
-    helpURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@#errors", PRODUCT_URL]];
+    helpURL = [NSURL URLWithString:FATAL_ERROR_URL];
     
     //open URL
     // ->invokes user's default browser
@@ -196,7 +174,7 @@ bail:
     BOOL status = NO;
     
     //configure object
-    Configure* configureObj;
+    Configure* configureObj = nil;
     
     //dbg msg
     logMsg(LOG_DEBUG, [NSString stringWithFormat:@"handling life cycle event, %lu", (unsigned long)event]);
@@ -209,8 +187,12 @@ bail:
     dispatch_sync(dispatch_get_main_queue(),
     ^{
         //complete
-        [self beginEvent];
+        [self beginEvent:event];
     });
+    
+    //sleep
+    // ->allow 'install' || 'uninstall' msg to show up
+    sleep(1);
     
     //perform action (install | uninstall)
     // ->perform background actions
@@ -235,7 +217,7 @@ bail:
     dispatch_async(dispatch_get_main_queue(),
     ^{
         //complete
-        [self completeEvent:status];
+        [self completeEvent:status event:event];
     });
     
     return;
@@ -243,7 +225,7 @@ bail:
 
 //begin event
 // ->basically just update UI
--(void)beginEvent
+-(void)beginEvent:(NSUInteger)event
 {
     //status msg frame
     CGRect statusMsgFrame = {0};
@@ -261,14 +243,24 @@ bail:
     //align text left
     [self.statusMsg setAlignment:NSLeftTextAlignment];
     
-    //update status msg UI
-    [self.statusMsg setStringValue:[NSString stringWithFormat:@"%@ing...", [self.actionButton.title lowercaseString]]];
+    //install msg
+    if(ACTION_INSTALL_FLAG == event)
+    {
+        //update status msg
+        [self.statusMsg setStringValue:@"Installing..."];
+    }
+    //uninstall msg
+    else
+    {
+        //update status msg
+        [self.statusMsg setStringValue:@"Uninstalling..."];
+    }
     
     //disable action button
-    self.actionButton.enabled = NO;
+    self.uninstallButton.enabled = NO;
     
     //disable cancel button
-    self.cancelButton.enabled = NO;
+    self.installButton.enabled = NO;
     
     //show spinner
     [self.activityIndicator setHidden:NO];
@@ -281,10 +273,13 @@ bail:
 
 //complete event
 // ->update UI after background event has finished
--(void)completeEvent:(BOOL)success
+-(void)completeEvent:(BOOL)success event:(NSUInteger)event
 {
     //status msg frame
     CGRect statusMsgFrame = {0};
+    
+    //action
+    NSString* action = nil;
     
     //result msg
     NSString* resultMsg = nil;
@@ -295,28 +290,29 @@ bail:
     //generally want centered text
     [self.statusMsg setAlignment:NSCenterTextAlignment];
     
+    //set action msg for install
+    if(ACTION_INSTALL_FLAG == event)
+    {
+        //set msg
+        action = @"install";
+        
+        //set result msg
+        resultMsg = [NSString stringWithFormat:@"Ostiarius %@ed (note: on OS upgrade new version may be required)", action];
+
+    }
+    //set action msg for uninstall
+    else
+    {
+        //set msg
+        action = @"uninstall";
+        
+        //set result msg
+        resultMsg = [NSString stringWithFormat:@"Ostiarius %@ed", action];
+    }
+    
     //success
     if(YES == success)
     {
-        //special case for 'install'
-        // ->add note for re-installing
-        if(YES == [self.actionButton.title isEqualToString:@"Install"])
-        {
-            //set result msg
-            resultMsg = [NSString stringWithFormat:@"Ostiarius %@ed (note: on OS upgrade new version may be required)", self.actionButton.title];
-            
-            //align text left
-            [self.statusMsg setAlignment:NSLeftTextAlignment];
-        }
-        
-        //case for uninstall
-        // ->just init with standard msg
-        else
-        {
-            //set result msg
-            resultMsg = [NSString stringWithFormat:@"Ostiarius %@ed", self.actionButton.title];
-        }
-        
         //set font to black
         resultMsgColor = [NSColor blackColor];
     }
@@ -324,18 +320,20 @@ bail:
     else
     {
         //set result msg
-        resultMsg = [[NSString stringWithFormat:@"error: %@ failed", self.actionButton.title] lowercaseString];
+        resultMsg = [NSString stringWithFormat:@"error: %@ failed", action];
         
         //set font to red
         resultMsgColor = [NSColor redColor];
         
         //show 'get more info' button
-        // ->don't have to worry about (re)hiding since the only option is to close the app
-        [self.moreInfoButton setHidden:NO];
+        self.moreInfoButton.hidden = NO;
     }
     
     //stop/hide spinner
     [self.activityIndicator stopAnimation:nil];
+    
+    //hide spinner
+    [self.activityIndicator setHidden:YES];
     
     //grab exiting frame
     statusMsgFrame = self.statusMsg.frame;
@@ -355,17 +353,29 @@ bail:
     //set status msg
     [self.statusMsg setStringValue:resultMsg];
     
-    //set button title to 'close'
-    self.actionButton.title = ACTION_CLOSE;
-    
-    //enable
-    self.actionButton.enabled = YES;
+    //toggle buttons
+    // ->after install turn on 'uninstall' and off 'install'
+    if(ACTION_INSTALL_FLAG == event)
+    {
+        //enable uninstall
+        self.uninstallButton.enabled = YES;
+        
+        //disable install
+        self.installButton.enabled = NO;
+    }
+    //toggle buttons
+    // ->after uninstall turn off 'uninstall' and on 'install'
+    else
+    {
+        //disable
+        self.uninstallButton.enabled = NO;
+        
+        //enable close button
+        self.installButton.enabled = YES;
+    }
     
     //ok to re-enable 'x' button
     [[self.window standardWindowButton:NSWindowCloseButton] setEnabled:YES];
-    
-    //make it active
-    [self.window makeFirstResponder:self.actionButton];
     
     //(re)make window window key
     [self.window makeKeyAndOrderFront:self];
@@ -377,17 +387,13 @@ bail:
 }
 
 //automatically invoked when window is closing
-// ->tell OS that we are done with window so it can (now) be freed
+// ->just exit application
 -(void)windowWillClose:(NSNotification *)notification
 {
-    //dbg msg
-    logMsg(LOG_DEBUG, @"configure window: windowWillClose()");
-    
     //exit
     [NSApp terminate:self];
     
     return;
 }
-
 
 @end

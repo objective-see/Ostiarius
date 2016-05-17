@@ -36,20 +36,8 @@
         goto bail;
     }
     
-    //already installed?
-    // ->display uninstall window
-    if(YES == isInstalled())
-    {
-        //show window
-        [self displayConfigureWindow:[NSString stringWithFormat:@"Uninstall OSTIARIUS (v. %@)", getVersion()] action:ACTION_UNINSTALL_FLAG];
-    }
-    //not installed
-    // ->display install window
-    else
-    {
-        //show window
-        [self displayConfigureWindow:[NSString stringWithFormat:@"Install OSTIARIUS (v. %@)", getVersion()] action:ACTION_INSTALL_FLAG];
-    }
+    //show window
+    [self displayConfigureWindow:isInstalled()];
     
 //bail
 bail:
@@ -58,17 +46,17 @@ bail:
 }
 
 //display configuration window w/ 'install' || 'uninstall' button
--(void)displayConfigureWindow:(NSString*)windowTitle action:(NSUInteger)action
+-(void)displayConfigureWindow:(BOOL)isInstalled
 {
     //alloc/init
     configureWindowController = [[ConfigureWindowController alloc] initWithWindowNibName:@"ConfigureWindowController"];
     
     //display it
-    // ->call this first to so that outlets are connected (not nil)
+    // ->call this first to so that outlets are connected
     [self.configureWindowController display];
     
     //configure it
-    [self.configureWindowController configure:windowTitle action:action];
+    [self.configureWindowController configure:isInstalled];
     
     return;
 }

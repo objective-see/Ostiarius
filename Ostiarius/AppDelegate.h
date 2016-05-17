@@ -27,7 +27,7 @@
 /* METHODS */
 
 //display configuration window w/ 'install' || 'uninstall' button
--(void)displayConfigureWindow:(NSString*)windowTitle action:(NSUInteger)action;
+-(void)displayConfigureWindow:(BOOL)isInstalled;
 
 //display error window
 -(void)displayErrorWindow:(NSDictionary*)errorInfo;

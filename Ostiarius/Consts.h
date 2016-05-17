@@ -9,9 +9,6 @@
 #ifndef __Ostiarius_Consts_h
 #define __Ostiarius_Consts_h
 
-//product url
-#define PRODUCT_URL @"https://objective-see.com/products/ostiarius.html"
-
 //general error URL
 #define FATAL_ERROR_URL @"https://objective-see.com/errors.html"
 

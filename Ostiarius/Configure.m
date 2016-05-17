@@ -31,6 +31,12 @@
         //dbg msg
         logMsg(LOG_DEBUG, @"installing...");
         
+        //always try stop kext
+        [self stopKext];
+        
+        //always remove kext
+        [self uninstallKext];
+        
         //install kext
         if(YES != [self installKext])
         {
@@ -206,7 +212,7 @@ bail:
     if(YES != [[NSFileManager defaultManager] removeItemAtPath:path error:&error])
     {
         //err msg
-        logMsg(LOG_ERR, [NSString stringWithFormat:@"ERROR: failed to delete kext (%@)", error]);
+        logMsg(LOG_ERR, [NSString stringWithFormat:@"failed to delete kext (%@)", error]);
         
         //bail
         goto bail;

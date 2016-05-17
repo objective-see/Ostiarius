@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D3E40B11CEAF06E002B0997 /* ConfigureWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D3E40B01CEAF06E002B0997 /* ConfigureWindowController.xib */; };
 		7D8488C61C350BA500148F37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8488C51C350BA500148F37 /* main.m */; };
 		7D8488CC1C350BFC00148F37 /* ConfigureWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8488C71C350BFC00148F37 /* ConfigureWindowController.m */; };
 		7D8488CD1C350BFC00148F37 /* ErrorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8488CA1C350BFC00148F37 /* ErrorWindowController.m */; };
@@ -22,11 +23,11 @@
 		7DF0DC691C350A780050D65D /* Exception.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0DC621C350A780050D65D /* Exception.m */; };
 		7DF0DC6A1C350A780050D65D /* Configure.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0DC641C350A780050D65D /* Configure.m */; };
 		7DF0DC6E1C350AD20050D65D /* ErrorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DF0DC6D1C350AD20050D65D /* ErrorWindowController.xib */; };
-		7DF0DC701C350ADC0050D65D /* ConfigureWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DF0DC6F1C350ADC0050D65D /* ConfigureWindowController.xib */; };
 		CD7F088C19AE6DCA00FF00FC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7F088B19AE6DCA00FF00FC /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D3E40B01CEAF06E002B0997 /* ConfigureWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigureWindowController.xib; path = Ostiarius/UI/ConfigureWindowController.xib; sourceTree = SOURCE_ROOT; };
 		7D8488C21C350B9400148F37 /* Ostiarius-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Ostiarius-Prefix.pch"; path = "Ostiarius/Ostiarius-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		7D8488C31C350B9400148F37 /* Ostiarius-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Ostiarius-Info.plist"; path = "Ostiarius/Ostiarius-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7D8488C51C350BA500148F37 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Ostiarius/main.m; sourceTree = SOURCE_ROOT; };
@@ -52,7 +53,6 @@
 		7DF0DC651C350A780050D65D /* Configure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Configure.h; path = Ostiarius/Configure.h; sourceTree = SOURCE_ROOT; };
 		7DF0DC661C350A780050D65D /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Consts.h; path = Ostiarius/Consts.h; sourceTree = SOURCE_ROOT; };
 		7DF0DC6D1C350AD20050D65D /* ErrorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ErrorWindowController.xib; path = Ostiarius/UI/ErrorWindowController.xib; sourceTree = SOURCE_ROOT; };
-		7DF0DC6F1C350ADC0050D65D /* ConfigureWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigureWindowController.xib; path = Ostiarius/UI/ConfigureWindowController.xib; sourceTree = SOURCE_ROOT; };
 		CD7F088819AE6DCA00FF00FC /* Ostiarius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ostiarius.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7F088B19AE6DCA00FF00FC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CD7F088E19AE6DCA00FF00FC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -83,8 +83,8 @@
 		CD7C872019D4428100EC7F0A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7D3E40B01CEAF06E002B0997 /* ConfigureWindowController.xib */,
 				7D8488D21C350CAE00148F37 /* MainMenu.xib */,
-				7DF0DC6F1C350ADC0050D65D /* ConfigureWindowController.xib */,
 				7DF0DC6D1C350AD20050D65D /* ErrorWindowController.xib */,
 			);
 			name = UI;
@@ -218,7 +218,7 @@
 				7D8488DE1C351C5900148F37 /* icon.png in Resources */,
 				7D8488D41C350CAE00148F37 /* MainMenu.xib in Resources */,
 				7D8488E11C351F3000148F37 /* ostiarius.png in Resources */,
-				7DF0DC701C350ADC0050D65D /* ConfigureWindowController.xib in Resources */,
+				7D3E40B11CEAF06E002B0997 /* ConfigureWindowController.xib in Resources */,
 				7D8488D81C35191F00148F37 /* Images.xcassets in Resources */,
 				7D8488D11C350C7B00148F37 /* Base.lproj in Resources */,
 				7D8488CF1C350C6500148F37 /* en.lproj in Resources */,
@@ -240,7 +240,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#cp -R -f $BUILT_PRODUCTS_DIR/Ostiarius.kext $BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Resources/\ncp -R -f /Users/patrick/objective-see/Ostiarius/DerivedData/Ostiarius/Build/Products/Release/Ostiarius.kext /Users/patrick/objective-see/Ostiarius/DerivedData/Ostiarius/Build/Intermediates/ArchiveIntermediates/Ostiarius/InstallationBuildProductsLocation/Applications/Ostiarius.app/Contents/Resources\n";
+			shellScript = "#cp -R -f $BUILT_PRODUCTS_DIR/Ostiarius.kext $BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Resources/\ncp -R -f ~/objective-see/Ostiarius/DerivedData/Ostiarius/Build/Products/Release/Ostiarius.kext ~/objective-see/Ostiarius/DerivedData/Ostiarius/Build/Intermediates/ArchiveIntermediates/Ostiarius/InstallationBuildProductsLocation/Applications/Ostiarius.app/Contents/Resources\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -109,7 +109,7 @@
     {
         //open URL
         // ->invokes user's default browser
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@#errors", PRODUCT_URL]]];
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:FATAL_ERROR_URL]];
     }
     
     //when error should cause an exit

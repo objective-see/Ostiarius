@@ -235,7 +235,7 @@ static int processExec(kauth_cred_t credential, void* idata, kauth_action_t acti
     
     //dbg msg
     // ->always print
-    printf("OSTIARIUS: %s is from the internet & is unsigned -> BLOCKING!\n", path);
+    IOLog("OSTIARIUS: %s is from the internet & is unsigned -> BLOCKING!\n", path);
     
     //kill the process
     // ->can't return 'KAUTH_RESULT_DENY', because its ignored (see 'Mac OS X Internals')
@@ -653,12 +653,12 @@ bool com_objectiveSee_OstiariusKext::start(IOService *provider)
     DEBUG_PRINT(("OSTIARIUS: starting (system version: %d,%d,%d)...\n", version_major, version_minor, version_revision));
     
     //version check
-    // ->only El Capitan, up to 10.11.4 (15.4.0)
+    // ->only El Capitan, up to 10.11.5 (15.5.0)
     if( (version_major != 15) ||
-        (version_minor > 4) )
+        (version_minor > 5) )
     {
         //err msg
-        DEBUG_PRINT(("OSTIARIUS ERROR: %d.%d.%d is an unsupported OS\n", version_major, version_minor, version_revision));
+        IOLog("OSTIARIUS ERROR: %d.%d.%d is an unsupported OS\n", version_major, version_minor, version_revision);
         
         //bail
         goto bail;
