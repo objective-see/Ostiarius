@@ -119,7 +119,7 @@ NSString* getVersion()
 }
 
 //is current OS version supported?
-// ->for now, up to OS X 10.11.5 (El Capitan)
+// ->for now, up to OS X 10.11.6 (El Capitan)
 BOOL isSupportedOS()
 {
     //support flag
@@ -159,8 +159,8 @@ BOOL isSupportedOS()
         goto bail;
     }
     
-    //got be OS X 11.0-5
-    if([osVersionInfo[@"bugfixVersion"] intValue] > 5)
+    //got be OS X 11.0-6
+    if([osVersionInfo[@"bugfixVersion"] intValue] > 6)
     {
         //err msg
         logMsg(LOG_ERR, [NSString stringWithFormat:@"OS bug fix version %@ not supported", osVersionInfo[@"bugfixVersion"]]);

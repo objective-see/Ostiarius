@@ -653,9 +653,9 @@ bool com_objectiveSee_OstiariusKext::start(IOService *provider)
     DEBUG_PRINT(("OSTIARIUS: starting (system version: %d,%d,%d)...\n", version_major, version_minor, version_revision));
     
     //version check
-    // ->only El Capitan, up to 10.11.5 (15.5.0)
+    // ->only El Capitan, up to 10.11.6 (15.6.0)
     if( (version_major != 15) ||
-        (version_minor > 5) )
+        (version_minor > 6) )
     {
         //err msg
         IOLog("OSTIARIUS ERROR: %d.%d.%d is an unsupported OS\n", version_major, version_minor, version_revision);
